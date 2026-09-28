@@ -457,19 +457,32 @@ Only the minimum authorized context required for the delegated task should cross
 
 ## 14. Frontier Output Re-entry
 
-A frontier response is external input to the Cognitive Instance.
+A frontier response is treated as **new information entering GRI**, not as an authoritative result.
+
+It must re-enter the same GRI cognitive process used for other incoming information.
 
 The canonical path is:
 
 `Frontier Model
 -> Frontier Response Envelope
--> Structural Validation
--> Provenance Attachment
+-> New Information Re-entry
+-> Curiosity / Context Evaluation
+-> Relevant PCG Retrieval
+-> Internal Cognition Sufficiency Evaluation
 -> Interpretation / Evidence Classification
 -> ICG Integration
--> Candidate / Proposal Evaluation`
+-> Routing if Required
+-> Candidate / Proposal / Explicit Null`
 
 Frontier output is never automatically persistent cognition.
+
+The fact that GRI requested the response does not increase its truth status.
+
+`Frontier Output -> New Information -> Same GRI Process`
+
+not:
+
+`Frontier Output -> Direct Persistent Cognition`
 
 A model response may be:
 
@@ -788,6 +801,8 @@ The Cognitive Instance inherits the GRI no-guessing principles:
 14. Communication protocol and CRP remain separate.
 15. TCM, ICG, PCG, and CSTR retain distinct responsibilities.
 16. Unknown information remains unknown.
+17. Every frontier response is reintroduced as new information and processed through the same GRI cognitive process.
+18. Frontier output cannot bypass Curiosity, internal cognition evaluation, evidence evaluation, Governance, or the Cognitive Kernel.
 
 ---
 

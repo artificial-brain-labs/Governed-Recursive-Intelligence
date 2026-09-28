@@ -8,7 +8,7 @@
   },
   "state_context": {
     "state_id": "STATE-001",
-    "state_version": "42"
+    "state_version": "1"
   },
   "observation": {
     "raw_input": "John cancelled the meeting again.",

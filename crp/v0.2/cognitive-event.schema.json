@@ -59,7 +59,14 @@
       "$ref": "#/$defs/uncertainty"
     },
     "proposal": {
-      "$ref": "#/$defs/proposal"
+      "anyOf": [
+        {
+          "$ref": "#/$defs/proposal"
+        },
+        {
+          "type": "null"
+        }
+      ]
     },
     "governance": {
       "$ref": "#/$defs/governance"

@@ -61,6 +61,7 @@ _ALLOWED = {
     ProcessingState.ROUTING: {
         ProcessingState.PROCESSING,
         ProcessingState.DELEGATED_PROCESSING,
+        ProcessingState.EVIDENCE_EVALUATION,
         ProcessingState.CLARIFICATION_REQUIRED,
         ProcessingState.BLOCKED,
     },

@@ -28,6 +28,6 @@ def test_cognitive_update_requires_evidence():
     errors = list(validator().iter_errors(load(INVALID)))
     assert any(
         error.validator == "minItems" and
-        error.absolute_path[-1:] == ["evidence"]
+        list(error.absolute_path)[-1:] == ["evidence"]
         for error in errors
     )

@@ -396,3 +396,161 @@ These should be resolved experimentally rather than prematurely fixed.
 12. PCG stores current cognitive dimension state; CSTR stores transition history.
 13. The model remains independent of database technology.
 14. No dimension may bypass the GRI governed transition pipeline.
+
+## 21. Conversation-Scoped Curiosity Activation
+
+A new conversation creates a new interaction context. The first cognitive
+dimension activated by that interaction is **Curiosity**.
+
+This is an architectural rule for the initial GRI interaction lifecycle:
+
+New Conversation
+-> New Interaction Instance
+-> Curiosity Activation
+-> Perception / Interpretation
+-> Salience
+-> Other Relevant Dimensions
+-> Evidence / Proposal
+-> Governance
+-> Cognitive Transition
+
+Curiosity is therefore not merely another optional dimension that may happen
+to activate later. It is the initial cognitive orientation for a new
+conversation.
+
+Curiosity does not mean that the system assumes anything about the user or
+the external world. Its role is to determine what should be explored,
+clarified, examined, or understood.
+
+A curiosity activation must therefore preserve the distinction:
+
+Curiosity -> Question / Exploration
+not:
+Curiosity -> Assumption
+
+The exact curiosity-value update equation remains open.
+
+## 22. Interaction-Scoped Cognitive Instance
+
+Every new interaction receives a distinct interaction-scoped cognitive
+execution instance.
+
+Conceptually:
+
+Interaction I_n
+-> Cognitive Instance CI_n
+-> PCG Instance / Cognitive Graph Context PCG_n
+
+The instance contains the cognitive state required to process that interaction
+while remaining connected to the persistent identity and learning history of
+the overall GRI system.
+
+This does **not** mean that every interaction creates an entirely isolated
+intelligence with no continuity.
+
+Instead, the interaction creates a new cognitive-processing instance that
+operates over persistent cognition and can produce governed changes to the
+persistent PCG.
+
+Conceptually:
+
+Persistent PCG_(n-1)
+        |
+        +----> Cognitive Instance CI_n
+        |          |
+        |          +--> TCM_n
+        |          +--> Curiosity_n
+        |          +--> Active Dimensions_n
+        |          +--> Reasoning_n
+        |          +--> Governance_n
+        |
+        +<---- Governed Cognitive Transition
+        |
+Persistent PCG_n
+
+## 23. PCG Graph Instance and Neuroplasticity Analogy
+
+Each interaction may create a new **PCG processing graph instance** representing
+the cognitive structures activated for that interaction.
+
+This is analogous to neuroplasticity at the architectural level: interaction
+can activate existing structures, establish new relationships, strengthen
+existing relationships, weaken relationships, or create new persistent
+cognitive structures through governed learning.
+
+The analogy is architectural, not a claim that GRI reproduces biological
+neural mechanisms.
+
+The interaction-scoped graph may contain:
+
+- activated dimensions
+- relevant identities
+- relevant concepts
+- relevant beliefs
+- active goals
+- relationship paths
+- candidate new cognitive objects
+- candidate impact paths
+
+The interaction graph is not automatically equivalent to permanent PCG.
+
+Only governed cognitive consequences are consolidated into persistent PCG.
+
+## 24. Curiosity as the Initial Cognitive Trigger
+
+The initial sequence is therefore:
+
+New Conversation
+-> Interaction Instance
+-> Curiosity Activation
+-> Curiosity Evaluation
+-> Salience / Exploration
+-> Relevant Dimension Activation
+-> Cognitive Interpretation
+-> Evidence
+-> Proposal
+-> Governance
+-> Kernel
+-> PCG Transition
+
+Curiosity may activate other dimensions through relationships and salience.
+
+For example:
+
+Curiosity
+-> Explore unfamiliar information
+-> Activate Relevance
+-> Activate Concept Formation
+-> Evaluate Trust where applicable
+
+These downstream activations remain context-dependent and must not be
+assumed merely because Curiosity is active.
+
+## 25. Human-Like Decision Requirement
+
+The phrase "Curiosity must decide like a human" is interpreted architecturally
+as a requirement that Curiosity participate in **contextual, goal-aware,
+relationship-aware, governed decision formation**, rather than behaving as a
+random question generator or fixed rule.
+
+Curiosity may contribute:
+
+- what is unknown
+- what is worth investigating
+- what clarification is needed
+- what relationship is relevant
+- what information could reduce uncertainty
+- what experience may be valuable for learning
+
+Curiosity must not manufacture missing facts.
+
+Therefore:
+
+Unknown -> Curiosity -> Investigation
+
+not:
+
+Unknown -> Curiosity -> Assumed Fact
+
+The exact human-like curiosity decision mechanism remains a research question
+and is not fixed as a simple formula in v0.1.

@@ -133,7 +133,7 @@ class JsonJournalStateStore(StateStore):
             "cstr": deepcopy(cstr),
         }
         with self.journal.open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps(entry, separators=(",", ":")) + "\\n")
+            handle.write(json.dumps(entry, separators=(",", ":")) + "\n")
 
     def commit_transition(
         self,

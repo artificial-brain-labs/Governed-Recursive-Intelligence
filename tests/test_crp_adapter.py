@@ -1,11 +1,14 @@
 import json
 from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "adapters"))
 
 from adapter import CRPAdapterError, adapt_crp_to_pipeline
 from governance import ConstraintResult, require_evidence
 from kernel import CognitiveState
 
-ROOT = Path(__file__).resolve().parents[1]
 EVENT = ROOT / "crp" / "v0.2" / "examples" / "john-cancelled-meeting.json"
 
 def load():

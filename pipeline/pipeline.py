@@ -29,6 +29,10 @@ def execute_and_persist_transition(
     timestamp: str | None = None,
 ) -> tuple[CognitiveState, GovernanceDecision, dict[str, Any]]:
     """Execute through Governance and Kernel, then persist exactly that result."""
+    current = store.read_current_state()
+    if current.state_id != state.state_id or current.state_version != state.state_version:
+        raise RuntimeError("supplied state is not the store current state")
+
     successor, decision, cstr = execute_governed_transition(
         state,
         proposal,

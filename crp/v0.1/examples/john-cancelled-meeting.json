@@ -6,7 +6,10 @@
   "observation":{
     "raw_input":"John cancelled the meeting again.",
     "status":"explicit",
-    "facts":[{"fact_id":"FACT-001","claim":"John cancelled the meeting.","status":"explicit"}]
+    "facts":[
+      {"fact_id":"FACT-001","claim":"John cancelled the meeting.","status":"explicit"},
+      {"fact_id":"FACT-002","claim":"The input contains the recurrence marker 'again'.","status":"observed"}
+    ]
   },
   "interpretation":{
     "entities":[{"entity_id":"PERSON-JOHN","type":"person","name":"John"}],
@@ -15,7 +18,7 @@
   },
   "inferences":[{
     "claim":"John may have a recurring pattern of cancelling meetings.",
-    "basis":["FACT-001","linguistic_marker:again"],
+    "basis":["FACT-001","FACT-002"],
     "status":"possible"
   }],
   "uncertainty":{"unknowns":["reason_for_cancellation","John's_intention"],"ambiguities":[]},

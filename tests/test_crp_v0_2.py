@@ -1,13 +1,18 @@
+import importlib.util
 import json
-import sys
 from pathlib import Path
 
 from jsonschema import Draft202012Validator, FormatChecker
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "crp" / "v0.2"))
 
-from validation import validate_semantics
+_spec = importlib.util.spec_from_file_location(
+    "gri_crp_v02_test_validation", ROOT / "crp" / "v0.2" / "validation.py"
+)
+_module = importlib.util.module_from_spec(_spec)
+assert _spec.loader is not None
+_spec.loader.exec_module(_module)
+validate_semantics = _module.validate_semantics
 
 SCHEMA = ROOT / "crp" / "v0.2" / "cognitive-event.schema.json"
 VALID = ROOT / "crp" / "v0.2" / "examples" / "john-cancelled-meeting.json"

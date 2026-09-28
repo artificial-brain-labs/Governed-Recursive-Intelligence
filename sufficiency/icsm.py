@@ -108,6 +108,8 @@ class ICSM:
                 consistency=consistency,
                 identity=identity,
                 capability=capability,
+                knowledge_gaps=[],
+                capability_gaps=[],
                 recovery=["retrieve_provenance", "evaluate_conflict", "clarify"],
                 unresolved=["relevant persistent cognition is conflicting"],
             )
@@ -122,6 +124,8 @@ class ICSM:
                 consistency=consistency,
                 identity=identity,
                 capability=capability,
+                knowledge_gaps=[],
+                capability_gaps=[],
                 recovery=["resolve_reference", "clarify"],
                 unresolved=["required identity/context is not uniquely resolved"],
             )

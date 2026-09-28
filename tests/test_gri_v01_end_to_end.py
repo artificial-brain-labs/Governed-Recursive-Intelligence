@@ -345,6 +345,7 @@ def test_frontier_output_requires_reentry_validation():
     # This test models the re-entry boundary explicitly; no state mutation is
     # attempted from the frontier output itself.
     event["evidence"] = []
+    event["inferences"] = []
     event["proposal"] = None
     event["transition_reference"] = None
     event["observation"]["status"] = "explicit"

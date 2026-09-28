@@ -11,7 +11,9 @@ def execute_governed_transition(state: CognitiveState, proposal: dict[str, Any] 
     evidence_ids = list(evidence_ids or [])
     governance_input = dict(proposal or {})
     if proposal is not None:
-        governance_input.setdefault("evidence", list(evidence_ids))
+        # Governance may authorize only against evidence explicitly supplied
+        # to this execution attempt. Proposal metadata is not evidence itself.
+        governance_input["evidence"] = list(evidence_ids)
     decision = evaluate_governance(governance_input, state_id=state.state_id, state_version=state.state_version, local_constraints=local_constraints, global_constraints=global_constraints)
     successor, cstr = apply_transition(state, proposal, interaction_id=interaction_id, governance_decision=decision.as_dict(), evidence_ids=evidence_ids, timestamp=timestamp)
     return successor, decision, cstr

@@ -60,16 +60,14 @@ def test_stale_writer_cannot_overwrite_newer_state(tmp_path):
         store.commit_transition(expected_state_version=1, successor=stale, cstr=make_cstr())
 
 
-def test_null_transition_is_not_persisted_as_state_commit(tmp_path):
+def test_null_transition_history_is_persisted_without_state_change(tmp_path):
     store = JsonJournalStateStore(tmp_path)
     store.initialize(make_state())
-    cstr = {"transition_id": "TR-NULL", "outcome": "null"}
+    cstr = {"transition_id": "TR-NULL", "outcome": "null", "null_reason": "governance rejection"}
 
-    with pytest.raises(Exception):
-        store.commit_transition(
-            expected_state_version=1,
-            successor=make_state(),
-            cstr=cstr,
-        )
+    store.record_transition(cstr)
 
-    assert store.read_current_state().state_version == 1
+    recovered = JsonJournalStateStore(tmp_path)
+    assert recovered.read_current_state().state_version == 1
+    assert recovered.read_transition("TR-NULL")["outcome"] == "null"
+    assert len(recovered.list_transitions()) == 1

@@ -148,6 +148,16 @@ Interaction
 -> Frontier Delegation Set
 -> Hybrid Execution
 
+Before delegation, GRI must first evaluate relevant internal cognition.
+
+The canonical sequence is:
+
+Interaction -> Curiosity -> Relevant PCG Retrieval -> Internal Cognition Sufficiency Evaluation -> Routing Decision
+
+A missing item in the initially retrieved PCG does not by itself justify frontier delegation. GRI must distinguish between information that can be resolved internally, information requiring additional retrieval, information that is genuinely unknown, retrieval failure, ambiguity, and requirements for external knowledge or specialized capability.
+
+Only after this internal evaluation may frontier delegation be selected.
+
 The delegation decision may consider:
 
 - task type
@@ -447,6 +457,9 @@ These are architecture requirements, but their detailed policy definitions remai
 13. Persistent cognition remains governed and traceable.
 14. The communication protocol and CRP remain separate concerns.
 15. Unknown remains unknown.
+16. Internal cognition is evaluated before frontier delegation.
+17. Initial absence from PCG does not automatically trigger frontier delegation.
+18. Frontier delegation requires a justified missing capability or information requirement.
 
 ## 23. Open Questions
 

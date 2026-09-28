@@ -52,7 +52,7 @@ def validate_semantics(event: dict[str, Any]) -> list[str]:
     if transition is not None and proposal is None:
         errors.append("a transition reference requires a cognitive proposal")
 
-    if governance.get("status") == "rejected" and transition is not None:
+    if governance.get("status") == "rejected" and (proposal is not None or transition is not None):
         errors.append("rejected governance cannot authorize a transition")
 
     return errors

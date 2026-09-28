@@ -1,6 +1,8 @@
 """Deterministic two-layer governance evaluator for GRI v0.1."""
 from dataclasses import dataclass, asdict
 from typing import Callable, Any
+from uuid import uuid4
+
 
 @dataclass(frozen=True)
 class ConstraintResult:
@@ -9,9 +11,13 @@ class ConstraintResult:
     status: str
     reason: str
 
+
 @dataclass(frozen=True)
 class GovernanceDecision:
+    decision_id: str
     proposal_id: str
+    state_id: str
+    state_version: int
     status: str
     local: tuple[ConstraintResult, ...]
     global_: tuple[ConstraintResult, ...]
@@ -23,9 +29,11 @@ class GovernanceDecision:
         result["global"] = result.pop("global_")
         return result
 
+
 Constraint = Callable[[dict[str, Any]], ConstraintResult]
 
-def evaluate_governance(proposal: dict[str, Any], *, local_constraints=None, global_constraints=None, governance_version="GRI-GOV-0.1") -> GovernanceDecision:
+
+def evaluate_governance(proposal: dict[str, Any], *, state_id: str = "", state_version: int = 0, local_constraints=None, global_constraints=None, governance_version="GRI-GOV-0.1") -> GovernanceDecision:
     local = tuple(c(proposal) for c in (local_constraints or []))
     global_results = tuple(c(proposal) for c in (global_constraints or []))
     if any(r.status == "fail" for r in global_results):
@@ -36,12 +44,14 @@ def evaluate_governance(proposal: dict[str, Any], *, local_constraints=None, glo
         status, reason = "requires_review", "governance review is required"
     else:
         status, reason = "approved", "all applicable governance constraints passed"
-    return GovernanceDecision(proposal.get("proposal_id", ""), status, local, global_results, reason, governance_version)
+    return GovernanceDecision(f"GOV-{uuid4().hex[:12]}", proposal.get("proposal_id", ""), state_id, state_version, status, local, global_results, reason, governance_version)
+
 
 def require_evidence(proposal):
     ok = bool(proposal.get("evidence"))
     return ConstraintResult("GOV-EVIDENCE-001", "local", "pass" if ok else "fail",
                             "proposal contains evidence references" if ok else "proposal contains no evidence references")
+
 
 def prohibit_goal_removal_without_review(proposal):
     review = proposal.get("target_type") == "goal" and proposal.get("operation") == "remove"

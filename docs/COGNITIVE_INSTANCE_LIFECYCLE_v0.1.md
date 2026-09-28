@@ -328,7 +328,72 @@ Graph expansion does not imply persistence.
 
 ---
 
-## 11. Cognitive Routing
+## 11. Internal Cognition Before Frontier Delegation
+
+Before the Cognitive Instance delegates any information or subtask to a frontier model, GRI must first evaluate relevant internal persistent cognition.
+
+The canonical decision sequence is:
+
+Interaction -> Curiosity -> Relevant PCG Retrieval -> Internal Cognition Sufficiency Evaluation -> Routing Decision
+
+The internal check asks:
+
+1. What relevant cognition already exists?
+2. Is that cognition sufficient for the current goal or task?
+3. What information, reasoning capability, or transformation is actually missing?
+4. Can GRI resolve the missing requirement through its own cognitive machinery?
+5. If not, is frontier delegation justified?
+6. If delegation is justified, what minimum authorized information should cross the boundary?
+
+Therefore:
+
+Internal Cognition Sufficient -> GRI-native processing
+
+Internal Cognition Insufficient -> Determine Missing Requirement -> Consider Frontier Delegation
+
+Importantly:
+
+Not Found in PCG != Automatically Send to Frontier
+
+Absence of a retrieved item may represent unknown information, retrieval failure, unresolved identity, insufficient indexing, or a genuinely external-knowledge requirement. These states must remain distinguishable.
+
+Frontier delegation is therefore a second-stage capability decision, not the default response to missing information.
+
+### Internal Cognition Check Before Delegation
+
+The Cognitive Instance must not send an interaction to a frontier model merely because a frontier model is available or because the information is not immediately present in the first retrieved PCG context.
+
+The internal evaluation should determine whether:
+
+- existing beliefs or concepts are sufficient;
+- existing relationships or dimensions provide the required context;
+- additional PCG retrieval may resolve the requirement;
+- the task can be completed through GRI-native reasoning;
+- current knowledge may be stale or insufficient for the requested task;
+- external knowledge or specialized reasoning is genuinely required;
+- clarification is preferable to delegation.
+
+Only after this evaluation should the routing decision select:
+
+- GRI-native;
+- frontier-delegated;
+- hybrid;
+- clarification-required; or
+- blocked.
+
+### Delegation Boundary
+
+When frontier delegation is selected:
+
+GRI Internal Cognition Check -> Missing Requirement -> Delegation Decision -> Context Minimization -> Governance / Access Check -> Frontier Model
+
+The frontier model receives only the authorized context required for the delegated task.
+
+This establishes the architectural invariant:
+
+> Internal Cognition Before External Delegation: GRI must evaluate relevant internal cognition before delegating to a frontier model and must delegate only when additional external capability or information is justified by the current interaction.
+
+## 12. Cognitive Routing
 
 After initial Curiosity evaluation, the Cognitive Instance determines how processing should proceed.
 
@@ -363,7 +428,7 @@ The important architectural rule is:
 
 ---
 
-## 12. Frontier Delegation
+## 13. Frontier Delegation
 
 When delegation is permitted, the Cognitive Instance creates a bounded delegation request.
 
@@ -390,7 +455,7 @@ Only the minimum authorized context required for the delegated task should cross
 
 ---
 
-## 13. Frontier Output Re-entry
+## 14. Frontier Output Re-entry
 
 A frontier response is external input to the Cognitive Instance.
 
@@ -420,7 +485,7 @@ It is not automatically evidence that an external-world proposition is true.
 
 ---
 
-## 14. Re-entrant Processing Loop
+## 15. Re-entrant Processing Loop
 
 A Cognitive Instance may execute multiple processing cycles.
 
@@ -451,7 +516,7 @@ A frontier model may therefore contribute reasoning repeatedly while GRI retains
 
 ---
 
-## 15. Candidate and Proposal Formation
+## 16. Candidate and Proposal Formation
 
 The Cognitive Instance may construct temporary candidates.
 
@@ -489,7 +554,7 @@ The Cognitive Instance cannot bypass Governance or the Cognitive Kernel.
 
 ---
 
-## 16. Explicit Null Outcome
+## 17. Explicit Null Outcome
 
 The Cognitive Instance must be capable of concluding:
 
@@ -525,7 +590,7 @@ Where a governed evaluation has occurred, the relevant history belongs in CSTR.
 
 ---
 
-## 17. Processing State Machine
+## 18. Processing State Machine
 
 The conceptual lifecycle is:
 
@@ -562,7 +627,7 @@ The exact runtime state machine and recovery semantics remain implementation wor
 
 ---
 
-## 18. What Processing Complete Means
+## 19. What Processing Complete Means
 
 Processing is complete for the current interaction decision when GRI can establish all of the following:
 
@@ -585,7 +650,7 @@ It means the interaction has reached a valid consolidation decision boundary.
 
 ---
 
-## 19. Exact Handoff to CCA
+## 20. Exact Handoff to CCA
 
 The Cognitive Instance hands control to CCA only at **Consolidation Readiness**.
 
@@ -615,7 +680,7 @@ Kernel remains the persistent-state execution boundary.
 
 ---
 
-## 20. Instance Ownership and Boundaries
+## 21. Instance Ownership and Boundaries
 
 The Cognitive Instance owns:
 
@@ -648,7 +713,7 @@ Therefore:
 
 ---
 
-## 21. Failure and Recovery Principles
+## 22. Failure and Recovery Principles
 
 Failure must not silently become cognition.
 
@@ -680,7 +745,7 @@ If processing is interrupted:
 
 ---
 
-## 22. No-Guessing Invariants
+## 23. No-Guessing Invariants
 
 The Cognitive Instance inherits the GRI no-guessing principles:
 
@@ -702,14 +767,17 @@ The Cognitive Instance inherits the GRI no-guessing principles:
 
 ---
 
-## 23. Architectural Invariants
+## 24. Architectural Invariants
 
 1. Every new interaction creates a bounded cognitive-processing context.
 2. Curiosity is the first cognitive dimension activated for a new interaction.
 3. Curiosity has the highest initial dimension weight under the current architecture.
 4. Curiosity may activate related dimensions through governed relationships.
 5. PCG access is demand-driven.
-6. The complete PCG is not automatically exposed to frontier models.
+6. Relevant internal cognition is evaluated before frontier delegation.
+7. Initial absence from PCG does not automatically trigger frontier delegation.
+8. Frontier delegation occurs only when additional capability or information is justified.
+9. The complete PCG is not automatically exposed to frontier models.
 7. Frontier delegation is controlled by GRI.
 8. Frontier outputs always re-enter GRI before influencing persistent cognition.
 9. Multiple frontier calls may occur within one instance.
@@ -723,7 +791,7 @@ The Cognitive Instance inherits the GRI no-guessing principles:
 
 ---
 
-## 24. Open Questions
+## 25. Open Questions
 
 The following are intentionally not fixed in v0.1:
 
@@ -753,7 +821,7 @@ These should be resolved through architecture and experimentation rather than pr
 
 ---
 
-## 25. Canonical Lifecycle
+## 26. Canonical Lifecycle
 
 The complete v0.1 lifecycle is:
 

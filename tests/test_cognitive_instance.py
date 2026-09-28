@@ -40,6 +40,20 @@ def test_canonical_lifecycle_reaches_cca_handoff():
     assert ci.state == "handed_to_cca"
 
 
+def test_routing_can_finish_with_evidence_evaluation_without_frontier_call():
+    ci = new_instance()
+
+    ci.transition(ProcessingState.ENVELOPE_READY)
+    ci.transition(ProcessingState.INTERACTION_IDENTIFIED)
+    ci.activate_curiosity()
+    ci.transition(ProcessingState.CONTEXT_EVALUATION)
+    ci.transition(ProcessingState.PROCESSING)
+    ci.transition(ProcessingState.ROUTING)
+    ci.transition(ProcessingState.EVIDENCE_EVALUATION)
+
+    assert ci.state == "evidence_evaluation"
+
+
 def test_null_is_valid_and_distinct_from_failure():
     ci = new_instance()
 

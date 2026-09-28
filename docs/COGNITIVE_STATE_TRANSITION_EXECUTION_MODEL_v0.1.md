@@ -528,7 +528,13 @@ The following invariants are mandatory for v0.1:
 17. Historical CSTR records do not directly mutate PCG.
 18. Foundation-model output never receives direct persistent-write authority.
 
-## 24. Canonical Execution Flow
+## 24. Executable v0.1 Alignment
+
+The current reference implementation binds each Governance decision to `proposal_id`, `state_id`, and `state_version`. The Kernel validates those bindings before execution and treats mismatches as null transitions. The durable pipeline also verifies that the supplied execution state matches the store's current state before invoking Governance and Kernel.
+
+The reference persistence implementation uses append-only JSONL for the journal. Null transitions are recorded as transition entries; committed transitions record the successor state and CSTR. The current file-backed implementation provides optimistic version checks but is not yet a fully transactional database implementation.
+
+## 25. Canonical Execution Flow
 
 The v0.1 execution flow is:
 
@@ -540,7 +546,7 @@ S_(t+1) = S_t
 
 with an explicit CSTR reason.
 
-## 25. Example
+## 26. Example
 
 Suppose Governance authorizes:
 
@@ -588,7 +594,7 @@ CSTR records target precondition failure.
 
 The Kernel does not create a replacement target.
 
-## 26. What v0.1 Does Not Solve
+## 27. What v0.1 Does Not Solve
 
 The following remain open research/implementation questions:
 - exact PCG mutation algorithms,
@@ -610,7 +616,7 @@ The following remain open research/implementation questions:
 
 These should be resolved incrementally without weakening the execution invariants.
 
-## 27. Core Principle
+## 28. Core Principle
 
 > **An authorized proposal is permission to attempt a specific cognitive transition—not permission to mutate state regardless of the actual state.**
 

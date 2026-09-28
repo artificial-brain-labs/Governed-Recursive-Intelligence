@@ -35,6 +35,10 @@ class StateStore:
     def list_transitions(self) -> list[dict[str, Any]]:
         raise NotImplementedError
 
+    def record_transition(self, cstr: dict[str, Any]) -> None:
+        """Persist transition history without changing current state."""
+        raise NotImplementedError
+
     def commit_transition(
         self,
         *,
@@ -109,7 +113,7 @@ class JsonJournalStateStore(StateStore):
 
     def read_transition(self, transition_id: str) -> dict[str, Any]:
         for entry in self._read_entries():
-            if entry.get("type") == "commit" and entry["cstr"].get("transition_id") == transition_id:
+            if entry.get("type") in {"commit", "transition"} and entry["cstr"].get("transition_id") == transition_id:
                 return deepcopy(entry["cstr"])
         raise KeyError(transition_id)
 
@@ -117,8 +121,19 @@ class JsonJournalStateStore(StateStore):
         return [
             deepcopy(entry["cstr"])
             for entry in self._read_entries()
-            if entry.get("type") == "commit"
+            if entry.get("type") in {"commit", "transition"}
         ]
+
+    def record_transition(self, cstr: dict[str, Any]) -> None:
+        if "transition_id" not in cstr or "outcome" not in cstr:
+            raise StateStoreError("CSTR requires transition_id and outcome")
+        entry = {
+            "type": "transition",
+            "transition_id": cstr["transition_id"],
+            "cstr": deepcopy(cstr),
+        }
+        with self.journal.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(entry, separators=(",", ":")) + "\\n")
 
     def commit_transition(
         self,

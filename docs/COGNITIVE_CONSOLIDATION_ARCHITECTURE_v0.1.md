@@ -477,6 +477,33 @@ The interaction-scoped cognitive instance may be discarded or retained as implem
 
 Its destruction must not erase persistent cognition or CSTR.
 
+
+## 18A. Consolidation Readiness and Handoff
+
+The interaction-scoped cognitive instance does not hand control to CCA simply because a message has arrived or because a frontier-model call has returned.
+
+The handoff occurs when the interaction reaches **consolidation readiness**.
+
+Consolidation readiness requires:
+
+1. required interaction processing for the current decision is complete;
+2. required frontier-model calls, if any, have completed or been intentionally terminated;
+3. relevant persistent cognition has been retrieved where needed;
+4. relevant evidence has been explicitly identified;
+5. candidate cognitive consequences have been evaluated;
+6. resulting proposals are structurally complete where proposals exist; and
+7. GRI can state either that a persistent cognitive consequence requires consolidation evaluation or that no persistent consequence is currently justified.
+
+Therefore:
+
+Interaction Instance -> ICG -> Routing / Frontier Loop -> Evidence Evaluation -> Proposal or Explicit Null -> CCA
+
+The interaction may pass through multiple GRI/frontier-model processing cycles before this handoff.
+
+CCA remains the consolidation boundary. It does not authorize commitment; Governance does that, and the Cognitive Kernel executes the authorized transition.
+
+A null handoff is valid. If processing concludes without a justified persistent consequence, CCA records the explicit null outcome and the persistent state remains unchanged where applicable.
+
 ## 19. Canonical Architecture
 
 The complete relationship is:
@@ -543,6 +570,7 @@ CCA v0.1 introduces the following invariants:
 18. TCM, ICG, PCG, and CSTR remain logically distinct.
 19. Storage technology must not redefine cognitive semantics.
 20. Persistent learning must be governed and traceable.
+21. CCA receives control only when the interaction reaches consolidation readiness.
 
 ## 22. Open Questions
 

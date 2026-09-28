@@ -56,6 +56,13 @@ def test_unknown_observation_cannot_contain_facts():
 def test_rejected_governance_cannot_authorize_updates():
     event = load(VALID)
     event["governance"]["status"] = "rejected"
+    event["cognitive_updates"] = [{
+        "update_id": "UPDATE-001",
+        "target_type": "relationship",
+        "operation": "reinforce",
+        "target_id": "REL-JOHN-MEETING",
+        "evidence": ["FACT-001"],
+    }]
 
     errors = validate_semantics(event)
 

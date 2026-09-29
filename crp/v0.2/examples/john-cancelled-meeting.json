@@ -1,0 +1,107 @@
+{
+  "crp_version": "0.2",
+  "interaction_id": "INT-001",
+  "timestamp": "2026-09-28T10:00:00Z",
+  "source": {
+    "type": "user",
+    "identifier": null
+  },
+  "state_context": {
+    "state_id": "STATE-001",
+    "state_version": "1"
+  },
+  "observation": {
+    "raw_input": "John cancelled the meeting again.",
+    "status": "explicit",
+    "facts": [
+      {
+        "fact_id": "FACT-001",
+        "claim": "John cancelled the meeting.",
+        "status": "explicit"
+      },
+      {
+        "fact_id": "FACT-002",
+        "claim": "The input contains the recurrence marker 'again'.",
+        "status": "observed"
+      }
+    ]
+  },
+  "interpretation": {
+    "entities": [
+      {
+        "entity_id": "ENT-001",
+        "type": "person",
+        "name": "John"
+      }
+    ],
+    "events": [
+      {
+        "event_id": "EV-001",
+        "type": "meeting_cancellation",
+        "actor": "ENT-001",
+        "target": null
+      }
+    ],
+    "relationships": []
+  },
+  "evidence": [
+    {
+      "evidence_id": "EVID-001",
+      "type": "observation",
+      "claim": "John cancelled the meeting.",
+      "source_ref": "FACT-001"
+    },
+    {
+      "evidence_id": "EVID-002",
+      "type": "observation",
+      "claim": "The input contains the recurrence marker 'again'.",
+      "source_ref": "FACT-002"
+    }
+  ],
+  "inferences": [
+    {
+      "inference_id": "INF-001",
+      "claim": "John may have a recurring pattern of cancelling meetings.",
+      "basis": [
+        "EVID-001",
+        "EVID-002"
+      ],
+      "status": "possible"
+    }
+  ],
+  "uncertainty": {
+    "unknowns": [
+      "reason_for_cancellation",
+      "John's_intention"
+    ],
+    "ambiguities": []
+  },
+  "proposal": {
+    "proposal_id": "PROP-001",
+    "target_type": "relationship",
+    "target_id": "REL-JOHN-MEETING",
+    "operation": "reinforce",
+    "evidence": [
+      "EVID-001",
+      "EVID-002"
+    ],
+    "rationale": "The available evidence may support a recurring interaction pattern, but further evaluation is required.",
+    "status": "proposed"
+  },
+  "governance": {
+    "status": "pending",
+    "constraints_checked": [
+      "relationship-update-local"
+    ],
+    "reason": null,
+    "version": "GRI-GOV-0.1"
+  },
+  "transition_reference": null,
+  "provenance": {
+    "source_interaction": "INT-001",
+    "interpreter": "cognitive-interpreter-v0.2",
+    "reasoning_component": null,
+    "originating_model": null,
+    "schema_version": "0.2"
+  }
+}

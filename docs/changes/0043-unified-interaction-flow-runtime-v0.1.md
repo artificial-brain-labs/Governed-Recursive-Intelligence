@@ -108,3 +108,8 @@ The first integrated test run after this change exposed a test-fixture mismatch:
 The fixture was corrected to represent a genuine capability-only gap, and a separate integration test now explicitly preserves the hybrid route when knowledge and capability gaps coexist.
 
 A fresh full repository test run is required after this correction.
+
+
+## Second Verification Correction
+
+A second fixture issue was identified after the first correction: ICSM correctly classifies unspecified evidence and freshness as unresolved knowledge gaps. The capability-only integration scenario therefore now explicitly supplies supported evidence and adequate freshness, isolating the intended capability gap without changing ICSM or CRDM behavior.

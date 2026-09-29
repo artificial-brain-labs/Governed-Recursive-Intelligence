@@ -89,6 +89,8 @@ def test_capability_gap_creates_delegation_boundary_without_invoking_provider():
         frontier_allowed=True,
         frontier_capabilities=("specialist-model",),
         internal_recovery_available=False,
+        evidence_state="supported",
+        freshness_state="adequate",
     )
 
     assert result.status == InteractionFlowStatus.DELEGATION_REQUIRED

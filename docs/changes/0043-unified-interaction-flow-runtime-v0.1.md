@@ -103,4 +103,8 @@ For delegated processing, the next boundary remains external frontier communicat
 
 ## Verification
 
-A full repository test run is required after pulling this change. The expected milestone is the existing 91-test baseline plus the new integration tests.
+The first integrated test run after this change exposed a test-fixture mismatch: the capability-only scenario also carried a knowledge gap because the retrieval stage had no seed. The router therefore correctly selected `hybrid`, matching the CRDM contract.
+
+The fixture was corrected to represent a genuine capability-only gap, and a separate integration test now explicitly preserves the hybrid route when knowledge and capability gaps coexist.
+
+A fresh full repository test run is required after this correction.

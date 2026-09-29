@@ -97,6 +97,23 @@ def test_capability_gap_creates_delegation_boundary_without_invoking_provider():
     assert result.instance.frontier_history == []
 
 
+def test_capability_and_knowledge_gaps_produce_hybrid_route():
+    result = InteractionFlow().start(
+        state=state(),
+        interaction_id="INT-FLOW-4B",
+        communication={"text": "Use specialist analysis with current context."},
+        requirement={"task": "evaluate", "subject": "specialist"},
+        retrieval_seeds=(),
+        native_capability_state="insufficient",
+        frontier_allowed=True,
+        frontier_capabilities=("specialist-model",),
+        internal_recovery_available=False,
+    )
+
+    assert result.status == InteractionFlowStatus.DELEGATION_REQUIRED
+    assert result.routing.outcome == RoutingOutcome.HYBRID
+
+
 def test_frontier_output_reenters_as_new_information_and_can_end_in_null():
     flow = InteractionFlow()
     result = flow.start(
